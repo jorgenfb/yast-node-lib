@@ -2,9 +2,7 @@ require('es6-promise').polyfill(); // Polyfill promises
 require('isomorphic-fetch'); // Polyfill fetch
 
 var apiErrors = require('../data/api-errors');
-
-var baseUrl = 'http://yast.local/1.0/';
-//var baseUrl = 'http://www.yast.com/1.0/';
+var baseUrl = 'http://www.yast.com/1.0/';
 
 function createUrl(params){
 	return baseUrl + '?lang=json&request=' + encodeURIComponent(JSON.stringify(params));
