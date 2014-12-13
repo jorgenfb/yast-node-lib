@@ -1,0 +1,32 @@
+module.exports = {
+	"1": {
+		"id":1,
+		"name":
+		"Work",
+		"variableTypes":[
+			{"id":1,"name":"startTime","valType":3},
+			{"id":2,"name":"endTime","valType":3},
+			{"id":3,"name":"comment","valType":5},
+			{"id":8,"name":"isRunning","valType":1},
+			{"id":15,"name":"hourlyCost","valType":2},
+			{"id":16,"name":"hourlyIncome","valType":2},
+			{"id":17,"name":"isBillable","valType":1}]},
+	"3":{
+		"id":3,
+		"name":
+		"Phonecall",
+		"variableTypes":[
+			{"id":9,"name":"startTime","valType":3},
+			{"id":10,"name":"endTime","valType":3},
+			{"id":11,"name":"comment","valType":5},
+			{"id":12,"name":"isRunning","valType":1},
+			{"id":13,"name":"phoneNumber","valType":5},
+			{"id":14,"name":"outgoing","valType":1},
+			{"id":18,"name":"hourlyIncome","valType":2},
+			{"id":19,"name":"hourlyCost","valType":2},
+			{"id":20,"name":"isBillable","valType":1}]},
+	"4":{
+		"id":4,
+		"name":"Coffee",
+		"variableTypes":[
+			{"id":21,"name":"time","valType":3}]}}
