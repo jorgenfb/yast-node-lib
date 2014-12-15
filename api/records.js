@@ -36,24 +36,20 @@ function remove(credentials, id){
 
 function types(credentials){
 	return api.request('meta.getRecordTypes', credentials).then(function(data){
-        // Create associative map of types. Using type id as key.
-        var types = {};
 
         // Extract types from the response structure
-        data.objects.forEach(function(obj){
+        return data.objects.map(function(obj){
 			// unwrap
 			var type = obj.recordType;
 
 			// Unwrap types
 			type.variableTypes = type.variableTypes.map(function(wrapper){
-			return wrapper.variableType;
+				return wrapper.variableType;
 			});
 
 			// Store in hashmap
-			types[type.id] = type;
+			return type;
         });
-
-        return types;
     });
 }
 
