@@ -1,23 +1,24 @@
 var api = require('./api');
 var recordTransformer = require('../utils/record-transformer');
+var recordTypes = require('../data/record-types');
 
 function search(credentials, params){
 	return api.request('data.getRecords', params, credentials).then(function(response){
-		return recordTransformer.fromRequest(response.objects);
+		return recordTransformer.fromRequest(response.objects, recordTypes);
 	});
 }
 
 function add(credentials, record){
 	var payload = recordTransformer.toRequest([record]);
 	return api.request('data.add', payload, credentials).then(function(response){
-		return recordTransformer.fromRequest(response.objects)[0];
+		return recordTransformer.fromRequest(response.objects, recordTypes)[0];
 	});
 }
 
 function update(credentials, record){
 	var payload = recordTransformer.toRequest([record]);
 	return api.request('data.change', payload, credentials).then(function(response){
-		return recordTransformer.fromRequest(response.objects)[0];
+		return recordTransformer.fromRequest(response.objects, recordTypes)[0];
 	});
 }
 
