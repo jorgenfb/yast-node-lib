@@ -35,7 +35,7 @@ function projectsToRequest(projects){
   	}
 
   	if (project.timeCreated){
-  		rp.timeCreated = timeUtils.toUnix(project.timeCreated) + '';
+  		rp.timeCreated = project.timeCreated + '';
   	}
 
   	rp.description = project.description || '';
@@ -64,7 +64,7 @@ function projectsFromRequest(data){
 		}
 
     // Fix types
-		project.timeCreated = timeUtils.fromUnix(project.timeCreated);
+		project.timeCreated = parseInt(project.timeCreated, 10);
     project.id = parseInt(project.id, 10);
     project.parentId = parseInt(project.parentId, 10);
     project.privileges = parseInt(project.privileges, 10);
