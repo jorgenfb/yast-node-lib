@@ -9,15 +9,15 @@ function search(credentials, params){
 }
 
 function add(credentials, record){
-	var payload = recordTransformer.toRequest([record]);
-	return api.request('data.add', payload, credentials).then(function(response){
+	var payload = recordTransformer.toRequest([record], recordTypes);
+	return api.request('data.add', {objects: payload}, credentials).then(function(response){
 		return recordTransformer.fromRequest(response.objects, recordTypes)[0];
 	});
 }
 
 function update(credentials, record){
-	var payload = recordTransformer.toRequest([record]);
-	return api.request('data.change', payload, credentials).then(function(response){
+	var payload = recordTransformer.toRequest([record], recordTypes);
+	return api.request('data.change', {objects: payload}, credentials).then(function(response){
 		return recordTransformer.fromRequest(response.objects, recordTypes)[0];
 	});
 }
