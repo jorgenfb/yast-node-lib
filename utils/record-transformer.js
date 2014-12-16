@@ -9,33 +9,44 @@ var timeUtils = require('./time-utils');
 function recordsToRequest(records, types){
   return records.map(function(record){
 
-    var type = types[record.typeId];
+    console.log('Initial record: ');
+    console.log(record);
+
+
+    var type = types[record.type];
 
     // Extract variables from members
     var variables = [];
     type.variableTypes.forEach(function(varType){
-      if (varType.valType === 3){
+      var value = record[varType.name];
 
-        // This is a date. Convert to unix time
-        variables.push(timeUtils.toUnix(record[varType.name]) + '');
-
-      } else {
-        var v = record[varType.name];
-
-        if (v === undefined || v === null){
-          v = '';
-        }
-
-        // Simple conversion to string
-        variables.push(v + '');
+      // Make sure we do not do toString() on null or undefined
+      if (value === undefined || value === null){
+        value = '';
       }
+
+      switch(varType.valType){
+        case 1: // Boolean, needs to be represented by '0' or '1'
+          value = value ? '1' : '0';
+          break;
+        default:
+          value = value + '';
+      }
+
+      console.log('Variable value ' + varType.name + ' has value ' + value);
+
+      // Simple conversion to string
+      variables.push(value);
     });
+
+    console.log('Variables: ');
+    console.log(variables);
 
     // Wrap record
     return {record: {
       id: record.id,
-      typeId: record.typeId,
-      project: record.projectId,
+      typeId: record.type,
+      project: record.project,
       variables: variables,
     }};
   });
@@ -56,17 +67,23 @@ function recordsFromRequest(records, types){
     // Find type
     var recordType = types[record.typeId]; // TODO: check if exists
 
+    // Change typeId to type
+    record.type = record.typeId;
+    delete record.typeId;
+
     record.variables.forEach(function(value, id){
       var type = recordType.variableTypes[id]; // TODO: check if exists
 
       // TODO: errorhandling
       switch(type.valType){
-        case 1:  // fallthrough
+        case 1:  // Boolean, represented as boolean
+          value = Number(value) !== 0;
+          break;
         case 2:
           value = Number(value);
           break;
-        case 3:
-          value = timeUtils.fromUnix(value);
+        case 3: // Unix timestamp
+          value = Number(value);
           break;
       }
 
