@@ -11,7 +11,7 @@ function createType(typeId){
 	var type = types[typeId];
 
   var record = {
-    typeId: typeId,
+    type: typeId,
   };
 
   // Fill with default values
