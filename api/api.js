@@ -1,5 +1,4 @@
 require('es6-promise').polyfill(); // Polyfill promises
-require('isomorphic-fetch'); // Polyfill fetch
 var http = require('http');
 
 var apiErrors = require('../data/api-errors');
