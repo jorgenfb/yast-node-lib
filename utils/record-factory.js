@@ -22,7 +22,7 @@ function createType(typeId){
         record[varType.name] = 0;
         break;
       case 3: // time
-        record[varType.name] = new Date();
+        record[varType.name] = Math.floor(Date.now()/1000);
         break;
       case 4: // string
         record[varType.name] = '';
