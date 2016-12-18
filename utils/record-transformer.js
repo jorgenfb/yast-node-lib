@@ -29,6 +29,9 @@ function recordsToRequest(records, types){
         case 1: // Boolean, needs to be represented by '0' or '1'
           value = value ? '1' : '0';
           break;
+        case 3:
+          value = parseInt(((value).getTime())/1000)
+          break;
         default:
           value = value + '';
       }
